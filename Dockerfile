@@ -1,3 +1,6 @@
+# Add Ansible Azure Module
+#  Try `pip install ansible[azure]`- No module named dns.version"}
+
 FROM centos:7
 
 RUN curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/msprod.repo
@@ -18,14 +21,14 @@ RUN yum install make -y
 
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
-RUN pip install 'msrestazure==0.4.16'
-RUN pip install 'azure==2.0.0rc6'
-RUN pip install 'azure-keyvault==0.3.4'
+
+RUN pip install azure
+#RUN pip install 'azure-keyvault==0.3.7'
 RUN pip install versioning
 RUN pip install packaging
 
-RUN pip install 'https://github.com/energizedwork/azure-log-analytics-alerts-cli/archive/0.1.6.zip '
-RUN az-la-cli version && echo "------------------ Azure Log Analytics CLI Successfully Installed ------------------"
+####RUN pip install 'https://github.com/energizedwork/azure-log-analytics-alerts-cli/archive/0.1.6.zip '
+####RUN az-la-cli version && echo "------------------ Azure Log Analytics CLI Successfully Installed ------------------"
 
 RUN mkdir -p /tmp/working && cd /tmp/working
 
@@ -53,6 +56,7 @@ RUN git --version && \
     echo "------------------ Git Successfully Installed ------------------"
 
 RUN yum install ansible -y
+RUN pip install ansible[azure]
 RUN ansible --version && \
     echo "------------------ Ansible Successfully Installed ------------------"
 
@@ -70,3 +74,4 @@ RUN npm -v && \
 ENV PATH="/opt/mssql-tools/bin:/var/lib/terraform:/root/bin:${PATH}"
 
 RUN yum clean all
+
