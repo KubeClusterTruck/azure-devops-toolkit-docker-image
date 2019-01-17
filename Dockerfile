@@ -74,3 +74,4 @@ RUN npm -v && \
 ENV PATH="/opt/mssql-tools/bin:/var/lib/terraform:/root/bin:${PATH}"
 
 RUN yum clean all
+
